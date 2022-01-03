@@ -11,42 +11,85 @@ class SwipePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.85,
-              child: TinderSwapCard(
-                maxWidth: MediaQuery.of(context).size.width,
-                maxHeight: MediaQuery.of(context).size.height * 0.8,
-                minWidth: MediaQuery.of(context).size.width * 0.8,
-                minHeight: MediaQuery.of(context).size.height * 0.79,
-                orientation: AmassOrientation.TOP,
-                animDuration: 500,
-                totalNum: 5,
-                stackNum: 3,
-                cardBuilder: buildCard,
-                swipeUpdateCallback:
-                    (DragUpdateDetails details, Alignment align) {
-                  // Get swiping card's alignment
-                  if (align.x < 0) {
-                    //Card is LEFT swiping
-                  } else if (align.x > 0) {
-                    //Card is RIGHT swiping
-                  }
-                },
-                swipeCompleteCallback:
-                    (CardSwipeOrientation orientation, int index) {
-                  /// Get orientation & index of swiped card!
-                },
-                cardController: cardController = CardController(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.00,
+                ),
+                child: TinderSwapCard(
+                  maxWidth: MediaQuery.of(context).size.width * 0.95,
+                  minWidth: MediaQuery.of(context).size.width * 0.85,
+                  maxHeight: MediaQuery.of(context).size.height * 0.68,
+                  minHeight: MediaQuery.of(context).size.height * 0.58,
+                  orientation: AmassOrientation.TOP,
+                  animDuration: 500,
+                  totalNum: 5,
+                  stackNum: 3,
+                  cardBuilder: buildCard,
+                  swipeUpdateCallback:
+                      (DragUpdateDetails details, Alignment align) {
+                    // Get swiping card's alignment
+                    if (align.x < 0) {
+                      //Card is LEFT swiping
+                    } else if (align.x > 0) {
+                      //Card is RIGHT swiping
+                    }
+                  },
+                  swipeCompleteCallback:
+                      (CardSwipeOrientation orientation, int index) {
+                    /// Get orientation & index of swiped card!
+                  },
+                  cardController: cardController = CardController(),
+                ),
               ),
             ),
-            Container(
-              color: Colors.white.withOpacity(0.2),
-              height: MediaQuery.of(context).size.height * 0.1,
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.red,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.red,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -92,11 +135,11 @@ Container buildCard(BuildContext context, int index) {
   return Container(
     decoration: BoxDecoration(
       border: Border.all(color: Colors.red),
-      color: Colors.white,
+      color: Colors.red,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.9),
-          spreadRadius: 3,
+          color: Colors.red.withOpacity(0.5),
+          spreadRadius: 2,
           blurRadius: 2,
         ),
       ],
@@ -112,24 +155,27 @@ Container buildCard(BuildContext context, int index) {
             color: cardColor,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(2),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                cardName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              cardName,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
-              Text("$cardAge"),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("View Profile"),
+            ),
+            Text(
+              "$cardAge",
+              style: TextStyle(
+                color: Colors.white,
               ),
-            ],
-          ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("View Profile"),
+            ),
+          ],
         ),
       ],
     ),
