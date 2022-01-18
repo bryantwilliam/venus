@@ -18,7 +18,7 @@ class SwipePage extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.7,
               child: Padding(
                 padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.00,
+                  top: MediaQuery.of(context).size.height * 0.01,
                 ),
                 child: TinderSwapCard(
                   maxWidth: MediaQuery.of(context).size.width * 0.95,
