@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
+import 'package:venus/root.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +17,12 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.red,
     ));
     return MaterialApp(
-        title: 'Venus',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        home: const SwipePage());
+      title: 'Venus',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: Example(),
+      //home: const SwipePage(),
+    );
   }
 }
