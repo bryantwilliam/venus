@@ -63,7 +63,7 @@ class SwipePage extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 2,
                         ),
@@ -82,7 +82,7 @@ class SwipePage extends StatelessWidget {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 2,
                         ),
@@ -144,7 +144,7 @@ Container buildCard(BuildContext context, int index) {
       color: Colors.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.black.withOpacity(0.5),
           spreadRadius: 2,
           blurRadius: 2,
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
-import 'package:venus/root.dart';
+import 'package:venus/root_nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: Example(),
+      home: RootNavigation(),
       //home: const SwipePage(),
     );
   }

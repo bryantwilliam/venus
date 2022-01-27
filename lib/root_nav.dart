@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:venus/pages/likes_page.dart';
+import 'package:venus/pages/messages_page.dart';
+import 'package:venus/pages/profile_page.dart';
 import 'package:venus/pages/swipe_page.dart';
 
-class Example extends StatefulWidget {
+class RootNavigation extends StatefulWidget {
   @override
-  _ExampleState createState() => _ExampleState();
+  _RootNavigationState createState() => _RootNavigationState();
 }
 
-class _ExampleState extends State<Example> {
+class _RootNavigationState extends State<RootNavigation> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
     SwipePage(),
-    Text(
-      'Likes',
-    ),
-    Text(
-      'Search',
-    ),
-    Text(
-      'Profile',
-    ),
+    LikesPage(),
+    MessagesPage(),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -42,14 +38,18 @@ class _ExampleState extends State<Example> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.02,
+                vertical: MediaQuery.of(context).size.height * 0.01),
             child: GNav(
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[100]!,
-              gap: 8,
+              gap: MediaQuery.of(context).size.width * 0.02,
               activeColor: Colors.black,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                  vertical: MediaQuery.of(context).size.height * 0.025),
               duration: Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
@@ -73,6 +73,7 @@ class _ExampleState extends State<Example> {
               ],
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
+                Vibrate.feedback(FeedbackType.light);
                 setState(() {
                   _selectedIndex = index;
                 });
