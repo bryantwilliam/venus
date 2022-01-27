@@ -55,16 +55,16 @@ class _ExampleState extends State<Example> {
               color: Colors.black,
               tabs: [
                 GButton(
-                  icon: Icons.home,
-                  text: 'Home',
+                  icon: Icons.explore,
+                  text: 'Swipe',
                 ),
                 GButton(
                   icon: Icons.favorite,
                   text: 'Likes',
                 ),
                 GButton(
-                  icon: Icons.search,
-                  text: 'Search',
+                  icon: Icons.message,
+                  text: 'Messages',
                 ),
                 GButton(
                   icon: Icons.person,

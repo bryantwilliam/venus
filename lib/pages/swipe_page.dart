@@ -11,7 +11,7 @@ class SwipePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red,
         body: Column(
           children: [
             Expanded(
@@ -60,7 +60,7 @@ class SwipePage extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.red,
+                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -71,7 +71,7 @@ class SwipePage extends StatelessWidget {
                     ),
                     child: const Icon(
                       Icons.close,
-                      color: Colors.white,
+                      color: Colors.red,
                     ),
                   ),
                   Container(
@@ -79,7 +79,7 @@ class SwipePage extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.red,
+                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -90,7 +90,7 @@ class SwipePage extends StatelessWidget {
                     ),
                     child: const Icon(
                       Icons.favorite,
-                      color: Colors.white,
+                      color: Colors.red,
                     ),
                   ),
                 ],
@@ -140,11 +140,11 @@ Container buildCard(BuildContext context, int index) {
   }
   return Container(
     decoration: BoxDecoration(
-      border: Border.all(color: Colors.red),
-      color: Colors.red,
+      border: Border.all(color: Colors.white),
+      color: Colors.white,
       boxShadow: [
         BoxShadow(
-          color: Colors.red.withOpacity(0.5),
+          color: Colors.white.withOpacity(0.5),
           spreadRadius: 2,
           blurRadius: 2,
         ),
@@ -168,13 +168,13 @@ Container buildCard(BuildContext context, int index) {
               cardName,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Colors.red,
               ),
             ),
             Text(
               "$cardAge",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.red,
               ),
             ),
             ElevatedButton(
