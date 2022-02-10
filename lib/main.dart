@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
 import 'package:venus/root_nav.dart';
+import 'package:venus/root_nav_fluid.dart';
+import 'package:venus/root_nav_google.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: RootNavigation(),
+      home: RootNavigationGoogle(),
       //home: const SwipePage(),
     );
   }
