@@ -57,6 +57,7 @@ class _RootNavigationState extends State {
   }
 
   void _handleNavigationChange(int index) {
+    Vibrate.feedback(FeedbackType.light);
     setState(() {
       switch (index) {
         case 0:
