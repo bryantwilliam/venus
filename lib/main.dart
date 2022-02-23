@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Venus',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        colorSchemeSeed: Colors.red,
       ),
       home: RootNavigationFluid(),
       //home: const SwipePage(),

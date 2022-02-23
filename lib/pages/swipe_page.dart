@@ -141,7 +141,7 @@ Container buildCard(BuildContext context, int index) {
   return Container(
     decoration: BoxDecoration(
       border: Border.all(color: Colors.white),
-      color: Colors.white,
+      color: Colors.red,
       boxShadow: [
         BoxShadow(
           color: Colors.black.withOpacity(0.5),
@@ -157,31 +157,53 @@ Container buildCard(BuildContext context, int index) {
     child: Column(
       children: [
         Expanded(
-          child: Container(
-            color: cardColor,
+          child: PageView(
+            // TODO change this to scroll view maybe
+            // TODO theres a bug when swiping it stays on the page u were on in the last card
+            // TODO put bio + other pics here
+            scrollDirection: Axis.vertical,
+            children: [
+              Container(
+                color: cardColor.withGreen(10),
+                child: const Center(
+                  child: Text("test1"),
+                ),
+              ),
+              Container(
+                color: cardColor.withRed(10),
+                child: const Center(
+                  child: Text("test2"),
+                ),
+              ),
+              Container(
+                color: cardColor.withBlue(10),
+                child: const Center(
+                  child: Text("test3"),
+                ),
+              )
+            ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              cardName,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
+        Container(
+          height: MediaQuery.of(context).size.height * 0.04,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                cardName,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            Text(
-              "$cardAge",
-              style: TextStyle(
-                color: Colors.red,
+              Text(
+                "$cardAge",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("View Profile"),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     ),

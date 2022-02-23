@@ -29,22 +29,19 @@ class _RootNavigationState extends State {
         backgroundColor: Colors.red,
         body: _child,
         bottomNavigationBar: FluidNavBar(
+          animationFactor: 1,
           icons: [
-            FluidNavBarIcon(
-                icon: Icons.message,
-                backgroundColor: Color(0xFFFCBA02),
-                extras: {"label": "Messages"}),
-            FluidNavBarIcon(
-                icon: Icons.explore,
-                backgroundColor: Color(0xFF4285F4),
-                extras: {"label": "Swipe"}),
-            FluidNavBarIcon(
-                icon: Icons.person,
-                backgroundColor: Color(0xFF34A950),
-                extras: {"label": "Profile"}),
+            FluidNavBarIcon(icon: Icons.message, extras: {"label": "Messages"}),
+            FluidNavBarIcon(icon: Icons.explore, extras: {"label": "Swipe"}),
+            FluidNavBarIcon(icon: Icons.person, extras: {"label": "Profile"}),
           ],
           onChange: _handleNavigationChange,
-          style: FluidNavBarStyle(iconUnselectedForegroundColor: Colors.white),
+          style: FluidNavBarStyle(
+            barBackgroundColor: Colors.white,
+            iconUnselectedForegroundColor: Colors.white,
+            iconSelectedForegroundColor: Colors.black,
+            iconBackgroundColor: Colors.red,
+          ),
           scaleFactor: 1.5,
           defaultIndex: 1,
           itemBuilder: (icon, item) => Semantics(
@@ -73,7 +70,7 @@ class _RootNavigationState extends State {
       _child = AnimatedSwitcher(
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 600),
         child: _child,
       );
     });
