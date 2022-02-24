@@ -106,6 +106,8 @@ class _SwipePageState extends State<SwipePage> {
 }
 
 SwipeCard buildCard(BuildContext context, int index) {
+  // TODO create an UNDO button by storing the list of cards for the session in a queue variable in this stateful widget and changing that queue with setState so that it rebuilds the swiper.
+
   Color cardColor;
   String cardName;
   int cardAge;
