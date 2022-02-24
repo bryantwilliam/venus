@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
 import 'package:venus/root_nav.dart';
 import 'package:venus/root_nav_fluid.dart';
-import 'package:venus/root_nav_google.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +13,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeData = ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+          brightness: Brightness.dark,
+          primary: Colors.white,
+          secondary: Colors.red,
+          background: Colors.red,
+          tertiary: Colors.redAccent,
+          shadow: Colors.black.withOpacity(0.3)),
+    );
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       //systemNavigationBarColor: Colors.black,
-      statusBarColor: Colors.red,
+      statusBarColor: themeData.colorScheme.background,
     ));
+
     return MaterialApp(
       title: 'Venus',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.red,
+      theme: themeData,
+      home: SafeArea(
+        child: RootNavigationFluid(),
       ),
-      home: RootNavigationFluid(),
       //home: const SwipePage(),
     );
   }
