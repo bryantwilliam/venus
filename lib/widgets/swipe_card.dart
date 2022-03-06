@@ -6,21 +6,23 @@ class SwipeCard extends StatelessWidget {
     required this.cardColor,
     required this.cardName,
     required this.cardAge,
+    required this.scrollController,
   }) : super(key: key);
 
   final Color cardColor;
   final String cardName;
   final int cardAge;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white),
-        color: Colors.red,
+        border: Border.all(color: Theme.of(context).colorScheme.primary),
+        color: Theme.of(context).colorScheme.primary,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.shadow,
             spreadRadius: 2,
             blurRadius: 2,
           ),
@@ -33,34 +35,50 @@ class SwipeCard extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: PageView(
-              // TODO change this to scroll view maybe
-              // TODO theres a bug when swiping it stays on the page u were on in the last card
-              // TODO put bio + other pics here
-              scrollDirection: Axis.vertical,
-              children: [
-                Container(
-                  color: cardColor.withGreen(10),
-                  child: const Center(
-                    child: Text("test1"),
-                  ),
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                controller: scrollController,
+                // TODO put bio + other pics here
+                child: Column(
+                  children: [
+                    Container(
+                      height: constraints.maxHeight,
+                      color: cardColor.withGreen(10),
+                      child: const Center(
+                        child: Text("Placeholder Picture 1"),
+                      ),
+                    ),
+                    Container(
+                      color: Theme.of(context).colorScheme.primary,
+                      child: Center(
+                        child: Text(
+                          "Placeholder Bio Section",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary),
+                        ),
+                      ),
+                      height: constraints.maxHeight * 0.5,
+                    ),
+                    Container(
+                      height: constraints.maxHeight,
+                      color: cardColor.withRed(10),
+                      child: const Center(
+                        child: Text("Placeholder Picture 2"),
+                      ),
+                    ),
+                    Container(
+                      height: constraints.maxHeight,
+                      color: cardColor.withBlue(10),
+                      child: const Center(
+                        child: Text("Placeholder Picture 3"),
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  color: cardColor.withRed(10),
-                  child: const Center(
-                    child: Text("test2"),
-                  ),
-                ),
-                Container(
-                  color: cardColor.withBlue(10),
-                  child: const Center(
-                    child: Text("test3"),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,13 +87,13 @@ class SwipeCard extends StatelessWidget {
                   cardName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
                 Text(
-                  "$cardAge",
+                  "${cardAge}",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
-import 'package:venus/root_nav.dart';
 import 'package:venus/root_nav_fluid.dart';
 
 void main() {
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.red,
           background: Colors.red,
           tertiary: Colors.redAccent,
-          shadow: Colors.black.withOpacity(0.3)),
+          shadow: Colors.black.withOpacity(0.5)),
     );
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

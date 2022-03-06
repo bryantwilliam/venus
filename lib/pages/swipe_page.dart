@@ -14,6 +14,7 @@ class SwipePage extends StatefulWidget {
 class _SwipePageState extends State<SwipePage> {
   // Use CardController this to trigger swap for example when super like.
   CardController cardController = CardController();
+  ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,12 @@ class _SwipePageState extends State<SwipePage> {
                 },
                 swipeCompleteCallback:
                     (CardSwipeOrientation orientation, int index) {
+                  if (orientation == CardSwipeOrientation.RIGHT ||
+                      orientation == CardSwipeOrientation.LEFT) {
+                    scrollController.jumpTo(
+                        0.0); // The SingleChildScrollView in SwipeCard widget doesn't reset position every time a new card is shown for some reason. So I have to do this.
+                  }
+
                   /// Get orientation & index of swiped card!
                 },
                 cardController: cardController,
@@ -103,44 +110,50 @@ class _SwipePageState extends State<SwipePage> {
       },
     );
   }
-}
 
-SwipeCard buildCard(BuildContext context, int index) {
-  // TODO create an UNDO button by storing the list of cards for the session in a queue variable in this stateful widget and changing that queue with setState so that it rebuilds the swiper.
+  SwipeCard buildCard(BuildContext context, int index) {
+    // TODO create an UNDO button by storing the list of cards for the session in a queue variable in this stateful widget and changing that queue with setState so that it rebuilds the swiper.
 
-  Color cardColor;
-  String cardName;
-  int cardAge;
-  switch (index) {
-    case 0:
-      cardColor = Colors.blue;
-      cardName = "William";
-      cardAge = 22;
-      break;
-    case 1:
-      cardColor = Colors.orange;
-      cardName = "Alex";
-      cardAge = 23;
-      break;
-    case 2:
-      cardColor = Colors.green;
-      cardName = "Bryan";
-      cardAge = 22;
-      break;
-    case 3:
-      cardColor = Colors.purple;
-      cardName = "Matt";
-      cardAge = 22;
-      break;
-    case 4:
-      cardColor = Colors.cyan;
-      cardName = "Lewis";
-      cardAge = 22;
-      break;
-    default:
-      cardColor = Colors.black;
-      cardName = "Callan";
-      cardAge = 32;
+    Color cardColor;
+    String cardName;
+    int cardAge;
+    switch (index) {
+      case 0:
+        cardColor = Colors.blue;
+        cardName = "William";
+        cardAge = 22;
+        break;
+      case 1:
+        cardColor = Colors.orange;
+        cardName = "Alex";
+        cardAge = 23;
+        break;
+      case 2:
+        cardColor = Colors.green;
+        cardName = "Bryan";
+        cardAge = 22;
+        break;
+      case 3:
+        cardColor = Colors.purple;
+        cardName = "Matt";
+        cardAge = 22;
+        break;
+      case 4:
+        cardColor = Colors.cyan;
+        cardName = "Lewis";
+        cardAge = 22;
+        break;
+      default:
+        cardColor = Colors.black;
+        cardName = "Callan";
+        cardAge = 32;
+    }
+
+    return SwipeCard(
+      cardColor: cardColor,
+      cardName: cardName,
+      cardAge: cardAge,
+      scrollController: scrollController,
+    );
   }
-  return SwipeCard(cardColor: cardColor, cardName: cardName, cardAge: cardAge);
 }
