@@ -50,7 +50,7 @@ class _SwipePageState extends State<SwipePage> {
                   if (orientation == CardSwipeOrientation.RIGHT ||
                       orientation == CardSwipeOrientation.LEFT) {
                     scrollController.jumpTo(
-                        0.0); // The SingleChildScrollView in SwipeCard widget doesn't reset position every time a new card is shown for some reason. So I have to do this.
+                        0.0); // NOTICE The SingleChildScrollView in SwipeCard widget doesn't reset position every time a new card is shown for some reason. So I have to do this.
                   }
 
                   /// Get orientation & index of swiped card!
