@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:venus/pages/swipe_page.dart';
 import 'package:venus/root_nav_fluid.dart';
 
+import 'models/match_option.dart';
+
 void main() {
   runApp(const MyApp());
 }
