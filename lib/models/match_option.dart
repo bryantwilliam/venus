@@ -1,20 +1,23 @@
+import 'package:age_calculator/age_calculator.dart';
 import 'package:flutter/material.dart';
 
 class MatchOption {
+  final String id;
   final String name;
   late final DateTime _birthday;
-  get age => DateTime.now().difference(_birthday);
-  final int
+  get age => AgeCalculator.age(_birthday).years;
+  late final String
       distanceKMs; // TODO store this in the server as a location but the client object should only be the distance for security.
-  get distanceMiles => (distanceKMs / 1.609).round();
+  late final String distanceMiles;
   final Gender gender;
   final String? bio;
   final List<Interest>? interests;
-  final List<String>? pronouns;
+  late final String? pronouns;
   final ActiveLevel? activeLevel;
   final Height? height;
   final String? work;
-  final String? education;
+  final String?
+      education; // TODO Change to an education object with type of degree, graduation year and school name
   final String?
       homeLocation; // TODO change this to some gps or google maps location object with a map icon
   final Vice? drinking;
@@ -31,13 +34,14 @@ class MatchOption {
   // TODO pictures
 
   MatchOption({
+    required this.id,
     required this.name,
     required DateTime birthday,
-    required this.distanceKMs,
+    required int distanceKMs,
     required this.gender,
     this.bio,
     this.interests,
-    this.pronouns,
+    List<String>? pronouns,
     this.activeLevel,
     this.height,
     this.work,
@@ -52,11 +56,16 @@ class MatchOption {
     this.religion,
   }) {
     _birthday = birthday;
-    starSign = showStarSign ? StarSign(_birthday) : null;
-  }
+    String pronounsStr = pronouns.toString();
+    this.pronouns =
+        pronounsStr.substring(1, pronounsStr.length - 1).replaceAll(", ", "/");
 
-  int getDistanceInMiles() {
-    return (distanceKMs / 1.609).round();
+    starSign = showStarSign ? StarSign(_birthday) : null;
+
+    this.distanceKMs = "$distanceKMs km away";
+
+    distanceMiles =
+        "${distanceKMs == 0 ? 0 : (distanceKMs / 1.609).round()} miles away";
   }
 }
 
@@ -78,10 +87,12 @@ class Height {
   Height(this._heightCM);
 
   String get heightCM => "$_heightCM cm";
+
   String get heightFtNIn {
-    int feet = (_heightCM / 12).round();
-    int inches = _heightCM % 12;
-    return "$feet ft $inches";
+    double totalFeet = _heightCM / 30.48;
+    int feet = totalFeet.floor();
+    int inches = ((totalFeet % 1) * 12).round();
+    return "$feet'$inches";
   }
 }
 
@@ -93,7 +104,7 @@ enum ActiveLevel {
 
 enum Vice {
   socially,
-  frequency,
+  frequently,
   never,
 }
 

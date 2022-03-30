@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:like_button/like_button.dart';
 
+import '../examples/dummy_data.dart';
 import '../widgets/swipe_card.dart';
 
 class SwipePage extends StatefulWidget {
@@ -118,39 +119,26 @@ class _SwipePageState extends State<SwipePage> {
     switch (index) {
       case 0:
         cardColor = Colors.blue;
-        cardName = "William";
-        cardAge = 22;
         break;
       case 1:
         cardColor = Colors.orange;
-        cardName = "Alex";
-        cardAge = 23;
         break;
       case 2:
         cardColor = Colors.green;
-        cardName = "Bryan";
-        cardAge = 22;
         break;
       case 3:
         cardColor = Colors.purple;
-        cardName = "Matt";
-        cardAge = 22;
         break;
       case 4:
         cardColor = Colors.cyan;
-        cardName = "Lewis";
-        cardAge = 22;
         break;
       default:
         cardColor = Colors.black;
-        cardName = "Callan";
-        cardAge = 32;
     }
 
     return SwipeCard(
       cardColor: cardColor,
-      cardName: cardName,
-      cardAge: cardAge,
+      matchOption: matchOptions[0],
       scrollController: scrollController,
     );
   }

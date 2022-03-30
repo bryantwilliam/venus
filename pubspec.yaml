@@ -38,6 +38,7 @@ dependencies:
   flutter_vibrate: ^1.3.0
   fluid_bottom_nav_bar: ^1.3.0
   like_button: ^2.0.4
+  age_calculator: ^1.0.0
 
 dev_dependencies:
   flutter_test:

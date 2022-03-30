@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../models/match_option.dart';
+
 class SwipeCard extends StatelessWidget {
   const SwipeCard({
     Key? key,
     required this.cardColor,
-    required this.cardName,
-    required this.cardAge,
+    required this.matchOption,
     required this.scrollController,
   }) : super(key: key);
 
   final Color cardColor;
-  final String cardName;
-  final int cardAge;
+  final MatchOption matchOption;
   final ScrollController scrollController;
 
   @override
@@ -50,14 +50,184 @@ class SwipeCard extends StatelessWidget {
                     ),
                     Container(
                       color: Theme.of(context).colorScheme.primary,
-                      child: Center(
-                        child: Text(
-                          "Placeholder Bio Section",
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary),
-                        ),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Placeholder Bio Section",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          Text(
+                            "Distance in KM: ${matchOption.distanceKMs}",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          Text(
+                            "Distance in miles: ${matchOption.distanceMiles}",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          Text(
+                            "Gender: ${matchOption.gender.parseNameForMatchOption}",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          if (matchOption.bio != null)
+                            Text(
+                              "Bio: ${matchOption.bio}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          Text(
+                            "Interests:",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          if (matchOption.interests != null)
+                            ...matchOption.interests!
+                                .map(
+                                  (interest) => Row(
+                                    children: [
+                                      Text(
+                                        interest.name,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      ),
+                                      Icon(
+                                        interest.icon,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          if (matchOption.pronouns != null)
+                            Text(
+                              "Pronouns: ${matchOption.pronouns}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.activeLevel != null)
+                            Text(
+                              "Active Level: ${matchOption.activeLevel!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.height != null)
+                            Text(
+                              "Height in CM: ${matchOption.height!.heightCM}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.height != null)
+                            Text(
+                              "Height in Ft: ${matchOption.height!.heightFtNIn}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.work != null)
+                            Text(
+                              "Work: ${matchOption.work}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.education != null)
+                            Text(
+                              "Education: ${matchOption.education}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.homeLocation != null)
+                            Text(
+                              "Home: ${matchOption.homeLocation}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.drinking != null)
+                            Text(
+                              "Drinking: ${matchOption.drinking!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.smoking != null)
+                            Text(
+                              "Smoking: ${matchOption.smoking!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.lookingFor != null)
+                            Text(
+                              "Looking for: ${matchOption.lookingFor!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          if (matchOption.kids != null)
+                            Text(
+                              "Kids: ${matchOption.kids!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          Text(
+                            "Star sign:",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          if (matchOption.starSign != null)
+                            Row(
+                              children: [
+                                Text(
+                                  matchOption.starSign!.name,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                                Icon(
+                                  matchOption.starSign!.icon,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              ],
+                            ),
+                          if (matchOption.politics != null)
+                            Text(
+                              "Politics: ${matchOption.politics!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                          if (matchOption.religion != null)
+                            Text(
+                              "Religion: ${matchOption.religion!.parseNameForMatchOption}",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                        ],
                       ),
-                      height: constraints.maxHeight * 0.5,
                     ),
                     Container(
                       height: constraints.maxHeight,
@@ -84,14 +254,14 @@ class SwipeCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  cardName,
+                  matchOption.name,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
                 Text(
-                  "${cardAge}",
+                  "${matchOption.age}",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                   ),

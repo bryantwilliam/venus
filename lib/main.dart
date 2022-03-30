@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = ThemeData(
       colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.red,
-          brightness: Brightness.dark,
-          primary: Colors.white,
-          secondary: Colors.red,
-          background: Colors.red,
-          tertiary: Colors.redAccent,
-          shadow: Colors.black.withOpacity(0.5)),
+        seedColor: Colors.red,
+        brightness: Brightness.dark,
+        primary: Colors.white,
+        secondary: Colors.red,
+        background: Colors.red,
+        tertiary: Colors.redAccent,
+        shadow: Colors.black.withOpacity(0.5),
+      ),
     );
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
