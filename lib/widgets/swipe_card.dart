@@ -38,7 +38,7 @@ class SwipeCard extends StatelessWidget {
             child: LayoutBuilder(
               builder: (context, constraints) => SingleChildScrollView(
                 controller: scrollController,
-                // TODO put bio + other pics here
+                // TODO lay it out better later
                 child: Column(
                   children: [
                     Container(

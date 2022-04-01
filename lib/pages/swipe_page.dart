@@ -93,10 +93,18 @@ class _SwipePageState extends State<SwipePage> {
             Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
       ),
       likeBuilder: (bool isLiked) {
-        return Icon(
-          type ? Icons.favorite : Icons.close,
-          color: Theme.of(context).colorScheme.primary,
-          size: buttonSize,
+        return Container(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(width: 2, color: Colors.white),
+          ),
+          child: FittedBox(
+            child: Icon(
+              type ? Icons.favorite : Icons.close,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
         );
       },
       onTap: (bool isLiked) async {
