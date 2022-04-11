@@ -98,6 +98,13 @@ class _SwipePageState extends State<SwipePage> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             border: Border.all(width: 2, color: Colors.white),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white.withOpacity(0.3),
+                blurRadius: 5,
+                spreadRadius: 3,
+              ),
+            ],
           ),
           child: FittedBox(
             child: Icon(
