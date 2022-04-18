@@ -3,5 +3,6 @@
         "cupertino",
         "Schyler",
         "tindercard"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
