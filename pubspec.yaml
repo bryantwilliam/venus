@@ -36,9 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_tindercard: ^0.2.0
   flutter_vibrate: ^1.3.0
-  fluid_bottom_nav_bar: ^1.3.0
+  fluid_bottom_nav_bar: 
+    git: https://github.com/bryantwilliam/fluid-nav-bar.git
   like_button: ^2.0.4
   age_calculator: ^1.0.0
+  firebase_core: ^1.14.1
+  firebase_auth: ^3.3.14
+  flutterfire_ui: ^0.4.0+2
+  firebase_analytics: ^9.1.5
 
 dev_dependencies:
   flutter_test:
