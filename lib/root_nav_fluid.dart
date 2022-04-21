@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
@@ -6,11 +7,14 @@ import 'package:venus/pages/profile_page.dart';
 import 'package:venus/pages/swipe_page.dart';
 
 class RootNavigationFluid extends StatefulWidget {
+  User _user;
+  RootNavigationFluid(this._user);
+
   @override
-  _RootNavigationState createState() => _RootNavigationState();
+  State<RootNavigationFluid> createState() => _RootNavigationFluidState();
 }
 
-class _RootNavigationState extends State {
+class _RootNavigationFluidState extends State<RootNavigationFluid> {
   Widget? _child;
 
   @override
@@ -55,7 +59,7 @@ class _RootNavigationState extends State {
           _child = SwipePage();
           break;
         case 2:
-          _child = ProfilePage();
+          _child = ProfilePage(widget._user);
           break;
       }
       _child = AnimatedSwitcher(

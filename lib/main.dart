@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     var themeData = ThemeData(
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.red,
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         primary: Colors.white,
         secondary: Colors.red,
         background: Colors.red,

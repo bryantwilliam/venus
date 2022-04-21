@@ -42,7 +42,6 @@ dependencies:
   age_calculator: ^1.0.0
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
-  flutterfire_ui: ^0.4.0+2
   firebase_analytics: ^9.1.5
 
 dev_dependencies:

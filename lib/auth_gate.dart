@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:venus/root_nav_fluid.dart';
 
 class AuthGate extends StatelessWidget {
@@ -13,21 +12,11 @@ class AuthGate extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return SignInScreen(
-            providerConfigs: [
-              PhoneProviderConfiguration(),
-              EmailProviderConfiguration(),
-              GoogleProviderConfiguration(
-                clientId: '...',
-              ),
-              FacebookProviderConfiguration(
-                clientId: '...',
-              )
-            ],
-          );
+          return Container(child: Text("login page"));
         }
-
-        return RootNavigationFluid();
+        User user = snapshot.data!;
+        print("user: " + user.toString());
+        return RootNavigationFluid(user);
       },
     );
   }
