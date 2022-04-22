@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart'; // TODO fork this repository on github and updated it
 import 'package:like_button/like_button.dart';
 
 import '../examples/dummy_data.dart';
@@ -80,10 +80,10 @@ class _SwipePageState extends State<SwipePage> {
     double? buttonSize = MediaQuery.of(context).size.height * 0.08;
     return LikeButton(
       isLiked: likeController,
-      likeCountPadding: EdgeInsets.all(0),
+      likeCountPadding: const EdgeInsets.all(0),
       size: buttonSize,
-      animationDuration: Duration(milliseconds: 500),
-      likeCountAnimationDuration: Duration(microseconds: 0),
+      animationDuration: const Duration(milliseconds: 500),
+      likeCountAnimationDuration: const Duration(microseconds: 0),
       circleColor: CircleColor(
           start: Theme.of(context).colorScheme.tertiary,
           end: Theme.of(context).colorScheme.tertiary.withOpacity(0.5)),
@@ -128,9 +128,9 @@ class _SwipePageState extends State<SwipePage> {
   SwipeCard buildCard(BuildContext context, int index) {
     // TODO create an UNDO button by storing the list of cards for the session in a queue variable in this stateful widget and changing that queue with setState so that it rebuilds the swiper.
 
+    // TODO change colour to images
+    // temporary
     Color cardColor;
-    String cardName;
-    int cardAge;
     switch (index) {
       case 0:
         cardColor = Colors.blue;

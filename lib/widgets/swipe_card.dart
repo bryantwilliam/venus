@@ -27,7 +27,7 @@ class SwipeCard extends StatelessWidget {
             blurRadius: 2,
           ),
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),

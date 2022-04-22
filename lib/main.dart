@@ -3,11 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:venus/firebase_options.dart';
-import 'package:venus/pages/swipe_page.dart';
-import 'package:venus/root_nav_fluid.dart';
 
 import 'auth_gate.dart';
-import 'models/match_option.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Venus',
       theme: themeData,
-      home: SafeArea(
+      home: const SafeArea(
         child: AuthGate(),
       ),
       navigatorObservers: [
