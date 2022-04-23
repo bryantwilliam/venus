@@ -16,7 +16,8 @@ class AuthGate extends StatelessWidget {
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Text(
               "splash or loading screen that says it's waiting to connect?"); // TODO
-        } else if (!snapshot.hasData) {
+        } else if (!snapshot.hasData /* || signup incomplete*/) {
+          // TODO also check if signup isn't completed
           return const SignInPage();
         } else {
           User user = snapshot.data!;

@@ -1,42 +1,41 @@
 {
   "project_info": {
-    "project_number": "947732727022",
-    "project_id": "venus-99940",
-    "storage_bucket": "venus-99940.appspot.com"
+    "project_number": "484516782994",
+    "project_id": "venus-b35eb",
+    "storage_bucket": "venus-b35eb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:947732727022:android:2e831bbd111b423dfe5fff",
+        "mobilesdk_app_id": "1:484516782994:android:3bd6a18a786547353b174b",
         "android_client_info": {
-          "package_name": "com.example.venus"
+          "package_name": "willalex.venusdating.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "947732727022-jjim06aovhtrs05a9fnk5ck8cqoqfs8b.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.venus",
-            "certificate_hash": "bc11c1344dbe508005efc659ba9df38ae051168f"
-          }
-        },
-        {
-          "client_id": "947732727022-sntirsgao7g1orohmgdt8589ghqgqnt4.apps.googleusercontent.com",
+          "client_id": "484516782994-o7gcopkpsl0jrujifhc5cfaoukvk573g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDRMLhPTaY5z20TdaCJoMemeEUovOgxzYk"
+          "current_key": "AIzaSyAoi5Qic_qixNGEk5ZukIAA5RVi0IR-Sh8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "947732727022-sntirsgao7g1orohmgdt8589ghqgqnt4.apps.googleusercontent.com",
+              "client_id": "484516782994-o7gcopkpsl0jrujifhc5cfaoukvk573g.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "484516782994-638nkkvtfeej54amrkdpnb9m6ehbele8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.venus"
+              }
             }
           ]
         }

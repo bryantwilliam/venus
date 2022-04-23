@@ -40,21 +40,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDRMLhPTaY5z20TdaCJoMemeEUovOgxzYk',
-    appId: '1:947732727022:android:2e831bbd111b423dfe5fff',
-    messagingSenderId: '947732727022',
-    projectId: 'venus-99940',
-    storageBucket: 'venus-99940.appspot.com',
+    apiKey: 'AIzaSyAoi5Qic_qixNGEk5ZukIAA5RVi0IR-Sh8',
+    appId: '1:484516782994:android:3bd6a18a786547353b174b',
+    messagingSenderId: '484516782994',
+    projectId: 'venus-b35eb',
+    storageBucket: 'venus-b35eb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDp9gIepcTlH-dV-de_4frbO37RYKtpL7Y',
-    appId: '1:947732727022:ios:01bd62915c362ec9fe5fff',
-    messagingSenderId: '947732727022',
-    projectId: 'venus-99940',
-    storageBucket: 'venus-99940.appspot.com',
-    androidClientId: '947732727022-jjim06aovhtrs05a9fnk5ck8cqoqfs8b.apps.googleusercontent.com',
-    iosClientId: '947732727022-t6l622aqup67nmsph9ei81vlna5590nn.apps.googleusercontent.com',
-    iosBundleId: 'com.example.venus',
+    apiKey: 'AIzaSyBDBYTWZYL2y_s8XZEjeoWmXln820Ky9U0',
+    appId: '1:484516782994:ios:e3cd69a1b614a41b3b174b',
+    messagingSenderId: '484516782994',
+    projectId: 'venus-b35eb',
+    storageBucket: 'venus-b35eb.appspot.com',
+    androidClientId: '484516782994-ib7u2uovenurlkpcnqno68q7p4bfg79d.apps.googleusercontent.com',
+    iosClientId: '484516782994-q88235ui24uenj150tuog8nmur20bol2.apps.googleusercontent.com',
+    iosBundleId: 'willalex.venusdating.app',
   );
 }
