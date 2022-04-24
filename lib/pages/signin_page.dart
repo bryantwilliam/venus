@@ -11,24 +11,14 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text("Sign in page"),
           ElevatedButton(
             onPressed: () {},
-            child: Text("Login with email"),
+            child: Text("Sign in with phone number"),
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text("Login with Facebook"),
+            child: Text("Sign in with Facebook"),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Login with Google"),
-          ),
-          if (Platform.isIOS)
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Login with Apple"),
-            ),
         ],
       ),
     );
