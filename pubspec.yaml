@@ -43,6 +43,8 @@ dependencies:
   firebase_core: ^1.14.1
   firebase_auth: ^3.3.14
   firebase_analytics: ^9.1.5
+  pinput: ^2.2.7
+  country_code_picker: ^2.0.2
 
 dev_dependencies:
   flutter_test:

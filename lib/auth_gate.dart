@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:venus/pages/signin_page.dart';
+import 'package:venus/pages/login_page.dart';
 import 'package:venus/root_nav_fluid.dart';
 
 class AuthGate extends StatelessWidget {
@@ -18,11 +18,17 @@ class AuthGate extends StatelessWidget {
               "splash or loading screen that says it's waiting to connect?"); // TODO
         } else if (!snapshot.hasData /* || signup incomplete*/) {
           // TODO also check if signup isn't completed
-          return const SignInPage();
+          return const LoginPage();
         } else {
           User user = snapshot.data!;
-          print("user: " + user.toString());
-          return RootNavigationFluid(user);
+          try {
+            user.reload();
+            print("AuthGate: user: " + user.toString());
+            return RootNavigationFluid(user);
+          } catch (e) {
+            print("authgate error: " + e.toString());
+            return const LoginPage();
+          }
         }
       },
     );
