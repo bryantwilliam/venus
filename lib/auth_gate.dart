@@ -21,14 +21,11 @@ class AuthGate extends StatelessWidget {
           return const LoginPage();
         } else {
           User user = snapshot.data!;
-          try {
-            user.reload();
-            print("AuthGate: user: " + user.toString());
-            return RootNavigationFluid(user);
-          } catch (e) {
-            print("authgate error: " + e.toString());
-            return const LoginPage();
-          }
+
+          user.reload();
+
+          print("AuthGate: user: " + user.toString());
+          return RootNavigationFluid(user);
         }
       },
     );
