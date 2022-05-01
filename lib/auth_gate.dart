@@ -9,6 +9,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
+      // TODO consider using FutureBuilder if bug still continues
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -20,7 +21,8 @@ class AuthGate extends StatelessWidget {
         } else if (snapshot.hasData) {
           User user = snapshot.data!;
 
-          // TODO remove debug prints
+          // TODO remove debug prints after testing this to see if the user changes after reload.
+          // If it changes, can use this as an indicator that the user is deleted in fireauth
           print("user 1: " + user.toString());
           print("current user 1: " +
               FirebaseAuth.instance.currentUser.toString());
@@ -29,11 +31,17 @@ class AuthGate extends StatelessWidget {
           print("current user 2: " +
               FirebaseAuth.instance.currentUser.toString());
 
-          // TODO
-          // if (if user deleted in firebase || signup incomplete*/) {
-          //     delete the user
-          //     return LoginPage();
-          // }
+          //TODO if user deleted in firebase auth or firestore
+          bool userNotExists = false;
+
+          // TODO signup incomplete could be checked using user.providerData
+          //or stored user data in database
+          bool signupIncomplete = false;
+
+          if (userNotExists || signupIncomplete) {
+            // TODO delete the user in firebase auth and firestore (if they are there) because user's data is broken
+            return LoginPage();
+          }
           return RootNavigationFluid(user);
         } else {
           return const LoginPage();
