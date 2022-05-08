@@ -4,30 +4,22 @@ import 'package:flutter/material.dart';
 
 import 'phone_verification_page.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class PhoneSignUpPage extends StatefulWidget {
+  const PhoneSignUpPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<PhoneSignUpPage> createState() => _PhoneSignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _PhoneSignUpPageState extends State<PhoneSignUpPage> {
   final TextEditingController _phoneController = TextEditingController();
   String countryDigits = "+00";
   bool validPhoneNumber = false;
 
   @override
   Widget build(BuildContext context) {
-    // TODO
-    // If facebook details supplied:
-    //      check if already have an acc, if so login, otherwise continue
-    // Signup with phone number:
-    //      check if already have an acc, if so login, otherwise continue
-    //      country code picker package
-    // Ask for email if not already supplied through Facebook
-    // Continue with signup details
-    //
-    // TODO Sign in with: await auth.signInWithCredential(credential);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -87,5 +79,11 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
   }
 }

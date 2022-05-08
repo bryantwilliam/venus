@@ -14,6 +14,12 @@ class ProfilePage extends StatelessWidget {
             Text("Profile Page"),
             Text("_user.toString() -----" + _user.toString()),
             Text(""),
+            ElevatedButton(
+              child: Text("Sign out"),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+            ),
             Text(""),
             Text(""),
           ],

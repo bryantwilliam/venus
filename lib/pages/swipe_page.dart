@@ -157,4 +157,11 @@ class _SwipePageState extends State<SwipePage> {
       scrollController: scrollController,
     );
   }
+
+  @override
+  void dispose() {
+    cardController.removeListener();
+    scrollController.dispose();
+    super.dispose();
+  }
 }

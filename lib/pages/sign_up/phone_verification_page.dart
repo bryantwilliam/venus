@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:venus/pages/sign_up/email_signup_page.dart';
+import 'package:venus/pages/sign_up/other_credentials_signup_page.dart';
+import 'package:venus/utils/firebase_auth_utils.dart';
 
 import '../../auth_gate.dart';
+import '../../utils/login_utils.dart';
 
 class PhoneVerificationPage extends StatefulWidget {
   final String phone;
@@ -17,27 +22,29 @@ class PhoneVerificationPage extends StatefulWidget {
 }
 
 class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
-  int? resendToken = null;
+  int? resendToken;
   final pinController = TextEditingController();
-  String? verificationCode = null;
+  String? verificationCode;
 
   @override
   Widget build(BuildContext context) {
-    verify(widget.phone, null);
+    if (resendToken == null) {
+      // If the code hasn't been sent yet (and thus no resend token)
+      verify(widget.phone, null);
+    }
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
             Pinput(
+              autofocus: true,
               controller: pinController,
               length: 6,
               onCompleted: (pin) async {
                 print("Pin: " + pin);
 
-                await FirebaseAuth.instance.signInWithCredential(
-                    PhoneAuthProvider.credential(
-                        smsCode: pin, verificationId: verificationCode!));
-                Navigator.popUntil(context, (route) => route.isFirst);
+                await signInWithPhoneCred(PhoneAuthProvider.credential(
+                    smsCode: pin, verificationId: verificationCode!));
               },
             ),
             if (resendToken != null)
@@ -53,9 +60,23 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
     );
   }
 
+  Future<void> signInWithPhoneCred(PhoneAuthCredential cred) async {
+    Widget nextPageInSignup;
+    if (isSignupPartial() && FirebaseAuth.instance.currentUser!.email != null) {
+      // TODO link phone to existing user and continue
+      nextPageInSignup = OtherCredentialsSignupPage(); // skip the email page
+    } else {
+      // signup is not partial and completely new
+      await FirebaseAuth.instance.signInWithCredential(cred);
+      nextPageInSignup = EmailSignupPage();
+    }
+    loginOrNextSignupPage(context, nextPageInSignup);
+  }
+
   Future<void> verify(String phone, int? resendToken) async {
     var auth = FirebaseAuth.instance;
     await auth.verifyPhoneNumber(
+      timeout: Duration(seconds: 60),
       phoneNumber: phone,
       forceResendingToken: resendToken,
       verificationCompleted: (PhoneAuthCredential credential) async {
@@ -65,8 +86,7 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
           pinController.text = credential.smsCode!;
         });
         await FirebaseAuth.instance.signInWithCredential(credential);
-
-        // TODO continue to next part of signup or login if already have acc
+        signInWithPhoneCred(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
         print("Failed to verifiy: " + phone);
@@ -81,15 +101,22 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
       },
       codeSent: (String verificationId, int? resendTok) {
         print("Code sent to: " + phone);
-        setState(() {
-          this.resendToken = resendTok;
-        });
         verificationCode = verificationId;
+        setState(() {
+          this.resendToken =
+              resendTok; // TODO Add a timer to this. Maybe make it can only re-send every 30 seconds.
+        });
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         print("codeAutoRetrievalTimeout.");
         verificationCode = verificationId;
       },
     );
+  }
+
+  @override
+  void dispose() {
+    pinController.dispose();
+    super.dispose();
   }
 }
