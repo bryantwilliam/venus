@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:venus/pages/sign_up/email_signup_page.dart';
 import 'package:venus/pages/sign_up/other_credentials_signup_page.dart';
-import 'package:venus/utils/firebase_auth_utils.dart';
+import 'package:venus/utils/auth_utils.dart';
 
 import '../../auth_gate.dart';
-import '../../utils/login_utils.dart';
 
 class PhoneVerificationPage extends StatefulWidget {
   final String phone;
@@ -28,6 +27,9 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO make sure code is sent from verify() before everything can be used. And give eerror messages.
+    // BUG this is to fix the bug where when u go back it has an error
+
     if (resendToken == null) {
       // If the code hasn't been sent yet (and thus no resend token)
       verify(widget.phone, null);
@@ -62,15 +64,36 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
 
   Future<void> signInWithPhoneCred(PhoneAuthCredential cred) async {
     Widget nextPageInSignup;
-    if (isSignupPartial() && FirebaseAuth.instance.currentUser!.email != null) {
-      // TODO link phone to existing user and continue
-      nextPageInSignup = OtherCredentialsSignupPage(); // skip the email page
+    if (isUserSignedIn()) {
+      // If the user is currently signed in to this device (through facebook <giving email>)
+      User user = FirebaseAuth.instance.currentUser!;
+
+      assert(user.emailVerified ==
+          true); // TODO Make sure signing in through facebook makes user.emailVerified = true. Come back to test this after implementing facebook login
+      // The user should only be here if the signup is incomplete, otherwise they should be logged in and something is wrong in the previous page probably.
+      assert(isUserIncomplete());
+
+      // Skip the email page since it's already connected.
+      nextPageInSignup = OtherCredentialsSignupPage();
+
+      if (hasPhoneLinked(user)) {
+        // If the signed in user already has a phone linked but an incomplete account, change the phone number.
+        await user.updatePhoneNumber(cred);
+      } else {
+        // Link phone to existing user who signed in through facebook <giving email>
+        await user.linkWithCredential(cred);
+      }
     } else {
-      // signup is not partial and completely new
-      await FirebaseAuth.instance.signInWithCredential(cred);
+      // The user isn't logged in.
+
+      // Continue to email page.
       nextPageInSignup = EmailSignupPage();
+
+      await FirebaseAuth.instance.signInWithCredential(cred);
     }
-    loginOrNextSignupPage(context, nextPageInSignup);
+
+    // If account is already finished, log them in. Otherwise, go to the next signup page.
+    loginOrNextSignupPage(context, nextPageInSignup, true);
   }
 
   Future<void> verify(String phone, int? resendToken) async {
@@ -108,6 +131,7 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
         });
       },
       codeAutoRetrievalTimeout: (String verificationId) {
+        // For when auto retrieval times out
         print("codeAutoRetrievalTimeout.");
         verificationCode = verificationId;
       },

@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/auth_utils.dart';
+
 class ProfilePage extends StatelessWidget {
-  final User _user;
-  const ProfilePage(this._user, {Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             Text("Profile Page"),
-            Text("_user.toString() -----" + _user.toString()),
+            Text("_user.toString() -----" +
+                tryGetCurrentUserOrSignout().toString()),
             Text(""),
             ElevatedButton(
               child: Text("Sign out"),

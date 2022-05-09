@@ -7,8 +7,7 @@ import 'package:venus/pages/profile_page.dart';
 import 'package:venus/pages/swipe_page.dart';
 
 class RootNavigationFluid extends StatefulWidget {
-  final User _user;
-  const RootNavigationFluid(this._user, {Key? key}) : super(key: key);
+  const RootNavigationFluid({Key? key}) : super(key: key);
 
   @override
   State<RootNavigationFluid> createState() => _RootNavigationFluidState();
@@ -59,7 +58,7 @@ class _RootNavigationFluidState extends State<RootNavigationFluid> {
           _child = const SwipePage();
           break;
         case 2:
-          _child = ProfilePage(widget._user);
+          _child = ProfilePage();
           break;
       }
       _child = AnimatedSwitcher(

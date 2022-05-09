@@ -11,10 +11,12 @@ class EmailSignupPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
+                label: Text("Email"),
               ),
             ),
             ElevatedButton(

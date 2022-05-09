@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:venus/pages/sign_up/login_page.dart';
 import 'package:venus/root_nav_fluid.dart';
-import 'package:venus/utils/firebase_auth_utils.dart';
+import 'package:venus/utils/auth_utils.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -24,11 +24,11 @@ class AuthGate extends StatelessWidget {
         } else if (snapshot.hasData) {
           User user = snapshot.data!;
 
-          if (isSignupPartial()) {
+          if (isUserIncomplete()) {
             // TODO delete the user in firebase auth and firestore (if they are there) because user's data is broken
             return LoginPage();
           }
-          return RootNavigationFluid(user);
+          return RootNavigationFluid();
         } else {
           return const LoginPage();
         }

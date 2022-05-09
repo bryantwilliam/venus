@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:venus/pages/sign_up/phone_signup_page.dart';
+import 'package:venus/utils/nav_utils.dart';
 
-import '../../utils/firebase_auth_utils.dart';
-import '../../utils/login_utils.dart';
+import '../../utils/auth_utils.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,16 +18,14 @@ class LoginPage extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              loginOrNextSignupPage(context, PhoneSignUpPage());
+              pushNextPage(context, PhoneSignUpPage(), false);
             },
             child: Text("Sign in with phone number"),
           ),
           ElevatedButton(
             onPressed: () async {
-              // Login with facebook
-              // Give _signInWithFacebook info to the signuppage.
               await _signInWithFacebook();
-              loginOrNextSignupPage(context, PhoneSignUpPage());
+              loginOrNextSignupPage(context, PhoneSignUpPage(), false);
             },
             child: Text("Sign in with Facebook"),
           ),
