@@ -18,14 +18,28 @@ class LoginPage extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              pushNextPage(context, PhoneSignUpPage(), false);
+              pushNextPage(context, PhoneSignUpPage());
             },
             child: Text("Sign in with phone number"),
           ),
           ElevatedButton(
             onPressed: () async {
               await _signInWithFacebook();
-              loginOrNextSignupPage(context, PhoneSignUpPage(), false);
+              // TODO check for error messages to display to user. If there are errors, just return; (facebook login failed, so do nothing)
+              if (isUserSignedIn()) {
+                User user = FirebaseAuth.instance.currentUser!;
+                if (!hasEmailLinked(user)) {
+                  // TODO error message to user
+                  return; // facebook login failed, so do nothing.
+                }
+              }
+              if (isUserIncomplete()) {
+                pushNextPage(
+                  context,
+                  PhoneSignUpPage(isFacebookSignup: true),
+                );
+              }
+              // otherwise should automatically log the user in, so do nothing.
             },
             child: Text("Sign in with Facebook"),
           ),

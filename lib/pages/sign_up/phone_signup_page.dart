@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'phone_verification_page.dart';
 
 class PhoneSignUpPage extends StatefulWidget {
+  final bool isFacebookSignup;
+
   const PhoneSignUpPage({
+    this.isFacebookSignup = false,
     Key? key,
   }) : super(key: key);
 
@@ -70,6 +73,7 @@ class _PhoneSignUpPageState extends State<PhoneSignUpPage> {
                           context,
                           MaterialPageRoute<void>(
                               builder: (_) => PhoneVerificationPage(
+                                  isFacebookSignup: widget.isFacebookSignup,
                                   phone:
                                       countryDigits + _phoneController.text)));
                     }

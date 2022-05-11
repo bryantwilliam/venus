@@ -7,11 +7,14 @@ import 'package:venus/pages/sign_up/other_credentials_signup_page.dart';
 import 'package:venus/utils/auth_utils.dart';
 
 import '../../auth_gate.dart';
+import '../../utils/nav_utils.dart';
 
 class PhoneVerificationPage extends StatefulWidget {
   final String phone;
+  final bool isFacebookSignup;
 
   const PhoneVerificationPage({
+    this.isFacebookSignup = false,
     Key? key,
     required this.phone,
   }) : super(key: key);
@@ -49,13 +52,14 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
                     smsCode: pin, verificationId: verificationCode!));
               },
             ),
-            if (resendToken != null)
-              ElevatedButton(
-                child: Text("Resend"),
-                onPressed: () {
-                  verify(widget.phone, resendToken);
-                },
-              ),
+            ElevatedButton(
+              child: Text("Resend"),
+              onPressed: resendToken == null
+                  ? null
+                  : () {
+                      verify(widget.phone, resendToken);
+                    },
+            ),
           ],
         ),
       ),
@@ -64,36 +68,45 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
 
   Future<void> signInWithPhoneCred(PhoneAuthCredential cred) async {
     Widget nextPageInSignup;
-    if (isUserSignedIn()) {
-      // If the user is currently signed in to this device (through facebook <giving email>)
-      User user = FirebaseAuth.instance.currentUser!;
 
-      assert(user.emailVerified ==
-          true); // TODO Make sure signing in through facebook makes user.emailVerified = true. Come back to test this after implementing facebook login
-      // The user should only be here if the signup is incomplete, otherwise they should be logged in and something is wrong in the previous page probably.
-      assert(isUserIncomplete());
+    await FirebaseAuth.instance.signInWithCredential(cred);
+    // TODO do error checking on this Future.
 
-      // Skip the email page since it's already connected.
-      nextPageInSignup = OtherCredentialsSignupPage();
-
-      if (hasPhoneLinked(user)) {
-        // If the signed in user already has a phone linked but an incomplete account, change the phone number.
-        await user.updatePhoneNumber(cred);
-      } else {
-        // Link phone to existing user who signed in through facebook <giving email>
-        await user.linkWithCredential(cred);
-      }
-    } else {
-      // The user isn't logged in.
-
-      // Continue to email page.
-      nextPageInSignup = EmailSignupPage();
-
-      await FirebaseAuth.instance.signInWithCredential(cred);
+    if (!isUserSignedIn()) {
+      // TODO handle error
+      // TODO maybe use Navigator.pop(context); to go back to phone_signup_page
+      // TODO error message to user.
+      return;
     }
 
-    // If account is already finished, log them in. Otherwise, go to the next signup page.
-    loginOrNextSignupPage(context, nextPageInSignup, true);
+    User user = FirebaseAuth.instance.currentUser!;
+
+    if (!hasPhoneLinked(user)) {
+      // TODO handle error
+      // TODO maybe use Navigator.pop(context); to go back to phone_signup_page
+      // TODO error message to user.
+      return;
+    }
+
+    if (!isUserIncomplete()) {
+      popAllPagesToFirst(
+          context); // If the user is complete, log the user in by popping all the signup pages.
+      return;
+    }
+
+    if (widget.isFacebookSignup) {
+      // NOTICE remove in production
+      assert(hasEmailLinked(user)); // NOTICE remove in production
+
+      nextPageInSignup = OtherCredentialsSignupPage();
+    } else {
+      nextPageInSignup = EmailSignupPage();
+    }
+    pushNextPage(
+      context,
+      nextPageInSignup,
+      pushReplace: true,
+    );
   }
 
   Future<void> verify(String phone, int? resendToken) async {

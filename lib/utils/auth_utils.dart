@@ -20,6 +20,11 @@ bool hasPhoneLinked(User user) {
   return user.phoneNumber != null;
 }
 
+bool hasEmailLinked(User user) {
+  return user
+      .emailVerified; //TODO or user.email == null. Check after facebook login is implemented
+}
+
 bool isUserSignedIn() {
   return FirebaseAuth.instance.currentUser != null;
 }
@@ -33,16 +38,4 @@ User? tryGetCurrentUserOrSignout() {
         .signOut(); // NOTICE This is used to update the authStateChange stream in auth_gate.dart incase the user is no longer signed in but there has been no authStateChange update for some reason (this means there's a bug).
   }
   return FirebaseAuth.instance.currentUser;
-}
-
-// if user's account is complete, pops all (thus logging in effectively for the user, by getting rid of the signup part that would be open)
-void loginOrNextSignupPage(
-    BuildContext context, Widget nextSignupPage, bool pushReplace) {
-  // check if already has acc, if so go to the next signup part,
-  // otherwise login by popping all login pages.
-  if (isUserIncomplete()) {
-    pushNextPage(context, nextSignupPage, pushReplace);
-  } else {
-    popAllPagesToFirst(context);
-  }
 }
