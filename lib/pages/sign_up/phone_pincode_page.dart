@@ -9,21 +9,21 @@ import 'package:venus/utils/auth_utils.dart';
 import '../../auth_gate.dart';
 import '../../utils/nav_utils.dart';
 
-class PhoneVerificationPage extends StatefulWidget {
+class PhonePincodePage extends StatefulWidget {
   final String phone;
   final bool isFacebookSignup;
 
-  const PhoneVerificationPage({
+  const PhonePincodePage({
     this.isFacebookSignup = false,
     Key? key,
     required this.phone,
   }) : super(key: key);
 
   @override
-  State<PhoneVerificationPage> createState() => _PhoneVerificationPageState();
+  State<PhonePincodePage> createState() => _PhonePincodePageState();
 }
 
-class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
+class _PhonePincodePageState extends State<PhonePincodePage> {
   int? resendToken;
   final pinController = TextEditingController();
   String? verificationCode;

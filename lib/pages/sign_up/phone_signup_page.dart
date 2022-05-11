@@ -2,7 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'phone_verification_page.dart';
+import 'phone_pincode_page.dart';
 
 class PhoneSignUpPage extends StatefulWidget {
   final bool isFacebookSignup;
@@ -72,7 +72,7 @@ class _PhoneSignUpPageState extends State<PhoneSignUpPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                              builder: (_) => PhoneVerificationPage(
+                              builder: (_) => PhonePincodePage(
                                   isFacebookSignup: widget.isFacebookSignup,
                                   phone:
                                       countryDigits + _phoneController.text)));
