@@ -10,7 +10,3 @@ Future<void> pushNextPage(BuildContext context, Widget nextPage,
         context, MaterialPageRoute<void>(builder: (_) => nextPage));
   }
 }
-
-void popAllPagesToFirst(BuildContext context) {
-  Navigator.popUntil(context, (route) => route.isFirst);
-}

@@ -1,13 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:venus/models/sign_up/phone_verification_details.dart';
-import 'package:venus/utils/auth_utils.dart';
-
-import '../../utils/nav_utils.dart';
-import 'email_signup_page.dart';
-import 'other_credentials_signup_page.dart';
-import 'phone_pincode_page.dart';
 
 class PhoneSignUpPage extends StatefulWidget {
   final bool isFacebookSignup;
@@ -105,55 +98,11 @@ class _PhoneSignUpPageState extends State<PhoneSignUpPage> {
             duration: Duration(seconds: 3),
           ),
         );
-        Navigator.pop(context);
       },
       codeSent: (String verificationId, int? resendTok) {},
       codeAutoRetrievalTimeout: (String verificationId) {
         // For when auto pin retrieval times out
       },
-    );
-  }
-
-  Future<void> signInOrContinue(PhoneAuthCredential cred) async {
-    Widget nextPageInSignup;
-
-    await FirebaseAuth.instance.signInWithCredential(cred);
-    // TODO do error checking on this Future.
-
-    if (!isUserSignedIn()) {
-      // TODO handle error
-      // TODO maybe use Navigator.pop(context); to go back to phone_signup_page
-      // TODO error message to user.
-      return;
-    }
-
-    User user = FirebaseAuth.instance.currentUser!;
-
-    if (!hasPhoneLinked(user)) {
-      // TODO handle error
-      // TODO maybe use Navigator.pop(context); to go back to phone_signup_page
-      // TODO error message to user.
-      return;
-    }
-
-    if (!isUserIncomplete()) {
-      popAllPagesToFirst(
-          context); // If the user is complete, log the user in by popping all the signup pages.
-      return;
-    }
-
-    if (widget.isFacebookSignup) {
-      // NOTICE remove in production
-      assert(hasEmailLinked(user)); // NOTICE remove in production
-
-      nextPageInSignup = OtherCredentialsSignupPage();
-    } else {
-      nextPageInSignup = EmailSignupPage();
-    }
-    pushNextPage(
-      context,
-      nextPageInSignup,
-      pushReplace: true,
     );
   }
 
