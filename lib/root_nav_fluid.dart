@@ -18,6 +18,8 @@ class _RootNavigationFluidState extends State<RootNavigationFluid> {
 
   @override
   Widget build(context) {
+    // TODO add popup if user is not email verified yet.
+
     _child ??= const SwipePage();
     // Build a simple container that switches content based of off the selected navigation item
     return Scaffold(

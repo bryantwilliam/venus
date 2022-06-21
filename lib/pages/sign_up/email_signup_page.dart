@@ -22,7 +22,7 @@ class EmailSignupPage extends StatelessWidget {
             ElevatedButton(
               child: Text("Next"),
               onPressed: () {
-                Navigator.popUntil(context, (route) => route.isFirst);
+                // TODO next page
               },
             ),
           ],

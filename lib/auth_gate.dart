@@ -9,8 +9,6 @@ class AuthGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-
     return StreamBuilder<User?>(
       // TODO consider using FutureBuilder if bug still continues
       stream: FirebaseAuth.instance.authStateChanges(),
@@ -19,19 +17,17 @@ class AuthGate extends StatelessWidget {
           return Text("Show error message popup that can't be exited" +
               snapshot.error.toString()); // TODO
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text(
+          return const Text(
               "splash or loading screen that says it's waiting to connect?"); // TODO
         } else if (snapshot.hasData) {
           User user = snapshot.data!;
-
-          if (isUserIncomplete()) {
-            // TODO delete the user in firebase auth and firestore (if they are there) because user's data is broken
-            return LoginPage();
+          if (isUserAccountSetup(user)) {
+            return const RootNavigationFluid();
           }
-          return RootNavigationFluid();
-        } else {
-          return const LoginPage();
+          // TODO remove this
+          print("debug auth gate: User account is not setup");
         }
+        return const LoginPage();
       },
     );
   }
