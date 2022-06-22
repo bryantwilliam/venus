@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/auth_utils.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class ProfilePage extends StatelessWidget {
             ElevatedButton(
               child: Text("Sign out"),
               onPressed: () async {
-                await FirebaseAuth.instance.signOut();
+                await logout();
               },
             ),
             Text(""),

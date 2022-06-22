@@ -12,7 +12,7 @@ class AuthGate extends StatelessWidget {
     return StreamBuilder<User?>(
       // TODO consider using FutureBuilder if bug still continues
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasError) {
           return Text("Show error message popup that can't be exited" +
               snapshot.error.toString()); // TODO
