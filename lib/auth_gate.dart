@@ -10,7 +10,7 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      // TODO consider using FutureBuilder if bug still continues
+      // TODO consider using FutureBuilder. Figure out the difference
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasError) {

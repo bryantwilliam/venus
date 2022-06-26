@@ -24,6 +24,7 @@ class LoginPage extends StatelessWidget {
             onPressed: () async {
               await _signInWithFacebook();
               // TODO check for error messages to display to user. If there are errors, just return; (facebook login failed, so do nothing)
+              pushNextPage(context, PhoneSignUpPage());
             },
             child: Text("Sign in with Facebook"),
           ),

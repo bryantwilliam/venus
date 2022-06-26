@@ -68,6 +68,7 @@ class _PhoneSignUpPageState extends State<PhoneSignUpPage> {
               onPressed: validPhoneNumber
                   ? () async {
                       String phone = countryDigits + _phoneController.text;
+                      // TODO verify(phone);
                     }
                   : null,
             ),
