@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
     FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
     return MaterialApp(
+      // NOTICE use for debugging lag: showPerformanceOverlay: true,
       title: 'Venus',
       theme: themeData,
       home: const SafeArea(
